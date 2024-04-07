@@ -1,5 +1,5 @@
 import type { TStreamType } from '#/configs/interfaces/TStreamType';
-import ora from 'ora';
+import ora = require('ora');
 
 export class Spinner {
   static #it: Spinner;
