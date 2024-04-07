@@ -76,7 +76,7 @@ describe('getConfigFilePath', () => {
       .spyOn(mnf, 'existsSync')
       .mockImplementationOnce(() => false)
       .mockImplementationOnce(() => true);
-    const spyH02 = vitest.spyOn(findUp, 'sync').mockImplementationOnce(() => findUpPath);
+    const spyH02 = vitest.spyOn(findUp, 'sync').mockImplementationOnce(() => Promise.resolve(findUpPath));
 
     const configPath = 'i-am-config';
     const input = { $0: '', config: configPath };
@@ -96,8 +96,8 @@ describe('getConfigFilePath', () => {
       .mockImplementationOnce(() => true);
     const spyH02 = vitest
       .spyOn(findUp, 'sync')
-      .mockImplementationOnce(() => undefined)
-      .mockImplementationOnce(() => findUpPath);
+      .mockImplementationOnce(() => Promise.resolve(undefined))
+      .mockImplementationOnce(() => Promise.resolve(findUpPath));
 
     const configPath = 'i-am-config';
     const projectPath = 'i-am-project';
@@ -118,8 +118,8 @@ describe('getConfigFilePath', () => {
       .mockImplementationOnce(() => true);
     const spyH02 = vitest
       .spyOn(findUp, 'sync')
-      .mockImplementationOnce(() => undefined)
-      .mockImplementationOnce(() => undefined);
+      .mockImplementationOnce(() => Promise.resolve(undefined))
+      .mockImplementationOnce(() => Promise.resolve(undefined));
 
     const configPath = 'i-am-config';
     const input = { $0: '', config: configPath };
