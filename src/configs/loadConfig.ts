@@ -22,8 +22,8 @@ export async function loadConfig(): Promise<
     const prjectPath = getConfigValue(argv, 'p', 'project');
     const tsconfigPath =
       prjectPath != null
-        ? findUp.sync(prjectPath)
-        : findUp.sync(CE_CTIX_DEFAULT_VALUE.TSCONFIG_FILENAME);
+        ? await findUp(async () => prjectPath)
+        : await findUp(async () => CE_CTIX_DEFAULT_VALUE.TSCONFIG_FILENAME);
 
     const configFilePath = getConfigFilePath(argv, tsconfigPath);
     const parsed =
